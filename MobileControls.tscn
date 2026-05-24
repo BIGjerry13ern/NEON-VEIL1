@@ -1,0 +1,6 @@
+CanvasLayer
+ ├── LeftJoystick (Control)
+ ├── RightTouchArea (Control)
+ ├── FireButton (Button)
+ ├── JumpButton (Button)
+ ├── PhaseButton (Button)
