@@ -1,0 +1,3 @@
+[application]
+config/name="NEON VEIL"
+run/main_scene="res://scenes/Main.tscn"
