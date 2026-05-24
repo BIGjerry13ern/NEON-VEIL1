@@ -1,0 +1,5 @@
+Main (Node3D)
+ ├── Player
+ ├── Enemy
+ ├── DirectionalLight3D
+ ├── Floor (StaticBody3D)
