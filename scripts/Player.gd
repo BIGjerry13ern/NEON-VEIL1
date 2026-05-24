@@ -4,27 +4,28 @@ extends CharacterBody3D
 @export var jump := 5.0
 var gravity := 9.8
 
+var move_input := Vector2.ZERO
+var look_input := Vector2.ZERO
+
+@onready var camera = $Camera3D
+
 func _physics_process(delta):
 
+	# MOVEMENT (from joystick)
 	var dir = Vector3.ZERO
-
-	if Input.is_action_pressed("forward"):
-		dir -= transform.basis.z
-	if Input.is_action_pressed("back"):
-		dir += transform.basis.z
-	if Input.is_action_pressed("left"):
-		dir -= transform.basis.x
-	if Input.is_action_pressed("right"):
-		dir += transform.basis.x
-
-	dir = dir.normalized()
+	dir += -transform.basis.z * move_input.y
+	dir += transform.basis.x * move_input.x
 
 	velocity.x = dir.x * speed
 	velocity.z = dir.z * speed
 
+	# GRAVITY + JUMP
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	elif Input.is_action_just_pressed("jump"):
-		velocity.y = jump
 
 	move_and_slide()
+
+	# CAMERA LOOK (from drag)
+	rotation.y -= look_input.x * 0.01
+	camera.rotation.x -= look_input.y * 0.01
+	camera.rotation.x = clamp(camera.rotation.x, -1.2, 1.2)
